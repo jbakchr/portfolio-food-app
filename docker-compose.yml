@@ -13,6 +13,9 @@ services:
   backend:
     build:
       context: ./backend
+    container_name: backend
     ports:
       - "5000:5000"
-    container_name: backend
+    command: ["./wait-for-it.sh", "db:3306", "--", "npm", "start"]
+    depends_on:
+      - db
