@@ -6,7 +6,7 @@ services:
     container_name: database
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: Esnum
+      MYSQL_ROOT_PASSWORD: Esmun
       MYSQL_DATABASE: foodapp
     cap_add:
       - SYS_NICE
