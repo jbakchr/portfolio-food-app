@@ -1,11 +1,12 @@
 const Sequelize = require("sequelize");
 
-const DB_PASSWORD = process.env.MYSQL_ROOT_PASSWORD
-  ? "Esmun"
-  : process.env.DB_PASSWORD;
+const DB_PASS = process.env.DB_PASSWORD ? process.env.DB_PASSWORD : "Esmun";
 const HOST = process.env.DB_HOST ? "localhost" : "db";
 
-const db = new Sequelize("foodapp", "root", DB_PASSWORD, {
+console.log("password:", DB_PASS);
+console.log("host:", HOST);
+
+const db = new Sequelize("foodapp", "root", DB_PASS, {
   host: HOST,
   dialect: "mysql",
 });
