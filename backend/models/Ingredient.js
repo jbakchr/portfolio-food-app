@@ -11,3 +11,5 @@ const Ingredient = db.define(
     timestamps: false,
   }
 );
+
+module.exports = Ingredient;
