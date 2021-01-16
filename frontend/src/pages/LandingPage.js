@@ -1,13 +1,15 @@
 import React from "react";
+import { Container } from "@material-ui/core";
 
 import Navbar from "../components/Navbar";
+import SearchField from "../components/SearchField";
 
 const LandingPage = () => {
   return (
-    <div>
+    <Container maxWidth="lg">
       <Navbar />
-      <p>Landing Page</p>
-    </div>
+      <SearchField />
+    </Container>
   );
 };
 
