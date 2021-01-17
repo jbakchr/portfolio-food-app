@@ -29,6 +29,10 @@ const LandingPage = () => {
     setSearchText(text);
   };
 
+  const searchWordClickHandler = (index) => {
+    console.log(index);
+  };
+
   return (
     <Container maxWidth="lg">
       <Navbar />
@@ -36,7 +40,11 @@ const LandingPage = () => {
         searchText={searchText}
         onSearchTextChange={onSearchTextChange}
       />
-      <SearchWordList searchText={searchText} searchWords={searchWords} />
+      <SearchWordList
+        searchText={searchText}
+        searchWords={searchWords}
+        searchWordClickHandler={searchWordClickHandler}
+      />
     </Container>
   );
 };
