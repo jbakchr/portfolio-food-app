@@ -8,6 +8,7 @@ import SearchWordList from "../components/SearchWordList";
 
 const LandingPage = () => {
   const [searchWords, setSearchWords] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchSearchWords();
@@ -24,10 +25,17 @@ const LandingPage = () => {
     }
   };
 
+  const onSearchTextChange = (text) => {
+    setSearchText(text);
+  };
+
   return (
     <Container maxWidth="lg">
       <Navbar />
-      <SearchField />
+      <SearchField
+        searchText={searchText}
+        onSearchTextChange={onSearchTextChange}
+      />
       <SearchWordList searchWords={searchWords} />
     </Container>
   );
