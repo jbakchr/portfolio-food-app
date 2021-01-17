@@ -4,6 +4,7 @@ import { Container } from "@material-ui/core";
 
 import Navbar from "../components/Navbar";
 import SearchField from "../components/SearchField";
+import SearchWordList from "../components/SearchWordList";
 
 const LandingPage = () => {
   const [searchWords, setSearchWords] = useState([]);
@@ -23,12 +24,11 @@ const LandingPage = () => {
     }
   };
 
-  console.log("search words:", searchWords);
-
   return (
     <Container maxWidth="lg">
       <Navbar />
       <SearchField />
+      <SearchWordList searchWords={searchWords} />
     </Container>
   );
 };
