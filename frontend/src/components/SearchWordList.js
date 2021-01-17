@@ -1,11 +1,17 @@
 import React from "react";
 import { List, ListItem } from "@material-ui/core";
 
-const SearchWordList = ({ searchWords }) => {
+const SearchWordList = ({ searchText, searchWords }) => {
   const renderListItems = () => {
-    return searchWords.map((el) => {
-      return <ListItem key={el.ingredient}>{el.ingredient}</ListItem>;
-    });
+    if (searchText) {
+      return searchWords.map((el) => {
+        if (el.ingredient.startsWith(searchText)) {
+          return <ListItem key={el.ingredient}>{el.ingredient}</ListItem>;
+        }
+        return null;
+      });
+    }
+    return null;
   };
 
   return <List>{renderListItems()}</List>;

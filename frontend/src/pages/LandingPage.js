@@ -36,7 +36,7 @@ const LandingPage = () => {
         searchText={searchText}
         onSearchTextChange={onSearchTextChange}
       />
-      <SearchWordList searchWords={searchWords} />
+      <SearchWordList searchText={searchText} searchWords={searchWords} />
     </Container>
   );
 };
