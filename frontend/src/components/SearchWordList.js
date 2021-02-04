@@ -1,5 +1,7 @@
 import React from "react";
-import { List, ListItem } from "@material-ui/core";
+import { List } from "@material-ui/core";
+
+import SearchWordListItem from "./SearchWordListItem";
 
 const SearchWordList = ({
   searchText,
@@ -11,12 +13,11 @@ const SearchWordList = ({
       return searchWords.map((el, index) => {
         if (el.ingredient.startsWith(searchText)) {
           return (
-            <div
+            <SearchWordListItem
               key={el.ingredient}
-              onClick={() => searchWordClickHandler(index)}
-            >
-              <ListItem button>{el.ingredient}</ListItem>
-            </div>
+              searchWordText={el.ingredient}
+              searchWordClickHandler={() => searchWordClickHandler(index)}
+            />
           );
         }
         return null;
