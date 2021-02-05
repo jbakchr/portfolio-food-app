@@ -37,6 +37,7 @@ const LandingPage = () => {
 
     // Set state
     setSearchWords(searchWordsCopy);
+    setSearchText("");
     setSearchWordSelection(searchWordSelection.concat(clickedSearchWord));
   };
 
