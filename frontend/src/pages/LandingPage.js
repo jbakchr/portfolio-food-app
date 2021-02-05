@@ -31,14 +31,11 @@ const LandingPage = () => {
   };
 
   const searchWordClickHandler = (index) => {
-    console.log(index);
-
-    // When a search word is clicked we first create a copy of the present
-    // list of search words and from there extract the clicked search word
+    // Get copy of "searchWords" and extract clicked search word
     let searchWordsCopy = [...searchWords];
     const clickedSearchWord = searchWordsCopy.splice(index, 1);
 
-    // Then we set state
+    // Set state
     setSearchWords(searchWordsCopy);
     setSearchWordSelection(searchWordSelection.concat(clickedSearchWord));
   };
