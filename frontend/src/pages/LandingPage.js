@@ -9,6 +9,7 @@ import SearchWordList from "../components/SearchWordList";
 const LandingPage = () => {
   const [searchWords, setSearchWords] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [searchWordSelection, setSearchWordSelection] = useState([]);
 
   useEffect(() => {
     fetchSearchWords();
@@ -31,6 +32,15 @@ const LandingPage = () => {
 
   const searchWordClickHandler = (index) => {
     console.log(index);
+
+    // When a search word is clicked we first create a copy of the present
+    // list of search words and from there extract the clicked search word
+    let searchWordsCopy = [...searchWords];
+    const clickedSearchWord = searchWordsCopy.splice(index, 1);
+
+    // Then we set state
+    setSearchWords(searchWordsCopy);
+    setSearchWordSelection(searchWordSelection.concat(clickedSearchWord));
   };
 
   return (
