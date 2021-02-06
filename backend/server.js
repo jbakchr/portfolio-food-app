@@ -4,6 +4,7 @@ const cors = require("cors");
 
 // Routes
 const searchWordRoute = require("./routes/search-word-route");
+const recipeRoute = require("./routes/recipe-route");
 
 // DB
 const db = require("./db/db");
@@ -18,6 +19,7 @@ app.use(cors());
 
 // Middleware routes
 app.use("/api/search-words", searchWordRoute);
+app.use("/api/recipes", recipeRoute);
 
 db.sync({ force: true })
   .then(() => {
