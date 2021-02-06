@@ -5,11 +5,12 @@ import { Container } from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import SearchField from "../components/SearchField";
 import SearchWordList from "../components/SearchWordList";
+import SearchWordChipList from "../components/SearchWordChipList";
 
 const LandingPage = () => {
   const [searchWords, setSearchWords] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [searchWordSelection, setSearchWordSelection] = useState([]);
+  const [searchWordSelections, setSearchWordSelections] = useState([]);
 
   useEffect(() => {
     fetchSearchWords();
@@ -38,7 +39,7 @@ const LandingPage = () => {
     // Set state
     setSearchWords(searchWordsCopy);
     setSearchText("");
-    setSearchWordSelection(searchWordSelection.concat(clickedSearchWord));
+    setSearchWordSelections(searchWordSelections.concat(clickedSearchWord));
   };
 
   return (
@@ -53,6 +54,7 @@ const LandingPage = () => {
         searchWords={searchWords}
         searchWordClickHandler={searchWordClickHandler}
       />
+      <SearchWordChipList searchWordSelections={searchWordSelections} />
     </Container>
   );
 };
