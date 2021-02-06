@@ -10,5 +10,17 @@
   {
     "ingredientId": 3,
     "recipeId": 1
+  },
+  {
+    "ingredientId": 4,
+    "recipeId": 2
+  },
+  {
+    "ingredientId": 1,
+    "recipeId": 2
+  },
+  {
+    "ingredientId": 5,
+    "recipeId": 2
   }
 ]
