@@ -49,12 +49,12 @@ const LandingPage = () => {
         searchText={searchText}
         onSearchTextChange={onSearchTextChange}
       />
+      <SearchWordChipList searchWordSelections={searchWordSelections} />
       <SearchWordList
         searchText={searchText}
         searchWords={searchWords}
         searchWordClickHandler={searchWordClickHandler}
       />
-      <SearchWordChipList searchWordSelections={searchWordSelections} />
     </Container>
   );
 };

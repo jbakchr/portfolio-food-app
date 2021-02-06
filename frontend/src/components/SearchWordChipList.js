@@ -9,7 +9,7 @@ const SearchWordChipList = ({ searchWordSelections }) => {
     });
   };
 
-  return <div>{renderSearchWordChips()}</div>;
+  return <div style={{ marginTop: 5 }}>{renderSearchWordChips()}</div>;
 };
 
 export default SearchWordChipList;
