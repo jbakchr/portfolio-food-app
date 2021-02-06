@@ -4,8 +4,9 @@ import { Container } from "@material-ui/core";
 
 import Navbar from "../components/Navbar";
 import SearchField from "../components/SearchField";
-import SearchWordList from "../components/SearchWordList";
 import SearchWordChipList from "../components/SearchWordChipList";
+import SearchWordList from "../components/SearchWordList";
+import RecipeList from "../components/RecipeList";
 
 const LandingPage = () => {
   const [searchWords, setSearchWords] = useState([]);
@@ -31,8 +32,9 @@ const LandingPage = () => {
     setSearchText(text);
   };
 
-  const searchWordClickHandler = (index) => {
-    // Get copy of "searchWords" and extract clicked search word
+  const searchWordClickHandler = async (index) => {
+    // When a search word is clicked we first get a copy of the search words
+    // from which we extract the clicked search word
     let searchWordsCopy = [...searchWords];
     const clickedSearchWord = searchWordsCopy.splice(index, 1);
 
@@ -40,6 +42,18 @@ const LandingPage = () => {
     setSearchWords(searchWordsCopy);
     setSearchText("");
     setSearchWordSelections(searchWordSelections.concat(clickedSearchWord));
+  };
+
+  const conditionalListRendering = () => {
+    return searchText ? (
+      <SearchWordList
+        searchText={searchText}
+        searchWords={searchWords}
+        searchWordClickHandler={searchWordClickHandler}
+      />
+    ) : (
+      <RecipeList />
+    );
   };
 
   return (
@@ -50,11 +64,7 @@ const LandingPage = () => {
         onSearchTextChange={onSearchTextChange}
       />
       <SearchWordChipList searchWordSelections={searchWordSelections} />
-      <SearchWordList
-        searchText={searchText}
-        searchWords={searchWords}
-        searchWordClickHandler={searchWordClickHandler}
-      />
+      {conditionalListRendering()}
     </Container>
   );
 };
