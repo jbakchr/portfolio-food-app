@@ -1,10 +1,13 @@
 import React from "react";
+import { Chip } from "@material-ui/core";
 
-const SearchWordChip = () => {
+const SearchWordChip = ({ label }) => {
   return (
-    <div>
-      <p>Chip</p>
-    </div>
+    <Chip
+      label={label}
+      color="primary"
+      onDelete={() => console.log("Delete me!")}
+    />
   );
 };
 
