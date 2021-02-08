@@ -1,4 +1,5 @@
 const express = require("express");
+const db = require("../db/db");
 
 const Ingredient = require("../models/Ingredient");
 

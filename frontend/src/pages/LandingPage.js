@@ -50,14 +50,24 @@ const LandingPage = () => {
     setRecipes(recipes);
   };
 
-  // TODO: Fix error handling
   const fetchRecipes = async (clickedSearchWord) => {
-    let recipes;
+    // When fetching recipes we first map over each of the present search word
+    // selections and concatenate the clicked search word
+    const presentSearchWordSelections = [...searchWordSelections]
+      .map((el) => el.search_word)
+      .concat(clickedSearchWord[0].search_word);
+
+    console.log("pres sws:", presentSearchWordSelections);
+
+    // And then we send our request to the backend with the selections as a string
     try {
-      recipes = await axios.get(
-        `http://localhost:5000/api/recipes?q=${clickedSearchWord[0].search_word}`
-      );
-      return recipes.data;
+      const { data } = await axios.get("http://localhost:5000/api/recipes", {
+        params: {
+          q: presentSearchWordSelections,
+        },
+      });
+      console.log("fetched recipes", data);
+      return data;
     } catch (error) {
       console.log(error);
     }

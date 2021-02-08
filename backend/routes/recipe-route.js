@@ -6,8 +6,8 @@ const db = require("../db/db");
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
-  // Get query
-  const query = req.query.q;
+  // Map query to correct sql syntax
+  const query = req.query.q.map((el) => `'${el}'`);
 
   // Create sql query
   const sql = `
@@ -17,7 +17,9 @@ router.get("/", async (req, res, next) => {
       ON r.id = ir.recipeId
     INNER JOIN ingredients AS i
       ON ir.ingredientId = i.id
-    WHERE i.ingredient IN ('${query.toString()}');
+    WHERE i.ingredient IN (${query.toString()})
+    GROUP BY r.id
+    HAVING COUNT(ir.ingredientId) = ${query.length};
   `;
 
   // Execute sql
