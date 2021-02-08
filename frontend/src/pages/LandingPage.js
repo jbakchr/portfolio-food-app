@@ -42,7 +42,7 @@ const LandingPage = () => {
 
     // Then we fetch recipes based on the users selection
     let recipes = await fetchRecipes(clickedSearchWord);
-    console.log(recipes);
+    console.log("recipes:", recipes);
 
     // And finally we set state
     setSearchWords(searchWordsCopy);
@@ -51,10 +51,15 @@ const LandingPage = () => {
     setRecipes(recipes);
   };
 
+  // TODO: Fix error handling
   const fetchRecipes = async (clickedSearchWord) => {
+    console.log("clicked search word:", clickedSearchWord);
+    console.log("search word selection", searchWordSelections);
     let recipes;
     try {
-      recipes = await axios.get("http://localhost:5000/api/recipes");
+      recipes = await axios.get(
+        `http://localhost:5000/api/recipes?q=${clickedSearchWord[0].id}`
+      );
       return recipes.data;
     } catch (error) {
       console.log(error);
