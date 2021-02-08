@@ -11,11 +11,11 @@ const SearchWordList = ({
   const renderListItems = () => {
     if (searchText) {
       return searchWords.map((el, index) => {
-        if (el.ingredient.startsWith(searchText)) {
+        if (el.search_word.startsWith(searchText)) {
           return (
             <SearchWordListItem
-              key={el.ingredient}
-              searchWordText={el.ingredient}
+              key={el.search_word}
+              searchWordText={el.search_word}
               searchWordClickHandler={() => searchWordClickHandler(index)}
             />
           );

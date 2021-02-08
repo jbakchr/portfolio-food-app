@@ -5,7 +5,7 @@ import SearchWordChip from "./SearchWordChip";
 const SearchWordChipList = ({ searchWordSelections }) => {
   const renderSearchWordChips = () => {
     return searchWordSelections.map((el) => {
-      return <SearchWordChip key={el.ingredient} label={el.ingredient} />;
+      return <SearchWordChip key={el.search_word} label={el.search_word} />;
     });
   };
 
