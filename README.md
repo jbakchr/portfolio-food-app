@@ -15,7 +15,7 @@ git
 docker
 ```
 
-#### Clone project
+### Clone project
 
 Clone this project by running and 'cd' into it
 
@@ -24,7 +24,7 @@ git clone https://github.com/jbakchr/portfolio-food-app.git
 cd portfolio-food-app
 ```
 
-#### Run project
+### Run project
 
 Just run the following command in order to spin up the entire project
 
