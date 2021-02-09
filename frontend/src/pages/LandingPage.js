@@ -33,15 +33,14 @@ const LandingPage = () => {
   };
 
   const searchWordClickHandler = async (index) => {
-    // When a search word is clicked we first create a copy of the present
-    // search words and from here extract the clicked search word
+    // Extract clicked search word
     let searchWordsCopy = [...searchWords];
     const clickedSearchWord = searchWordsCopy.splice(index, 1);
 
-    // Then we fetch recipes based on the users selection
+    // Fetch recipes
     let recipes = await fetchRecipes(clickedSearchWord);
 
-    // And finally we set state
+    // Set state
     setSearchWords(searchWordsCopy);
     setSearchWordSelections(searchWordSelections.concat(clickedSearchWord));
     setSearchText("");
@@ -68,6 +67,38 @@ const LandingPage = () => {
     }
   };
 
+  const chipDeleteHandler = async (index) => {
+    // When a search word chip is clicked for deletion then we first remove
+    // the clicked chip from the present selection of search word chips
+    const chipSelections = [...searchWordSelections];
+    const deletedChip = chipSelections.splice(index, 1);
+
+    // Then we check if any chips is left and if so fetch new recipes
+    let recipes = [];
+    if (chipSelections.length > 0) {
+      try {
+        const { data } = await axiosInstance.get("recipes", {
+          params: {
+            q: chipSelections.map((el) => el.search_word),
+          },
+        });
+        recipes = data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // Finally we:
+    //  - transfer the "deleted" chip back to the list of search words
+    //  - clear the search field
+    //  - set the new array of recipes
+    //  - set the new array of search word chips
+    setSearchWords([...searchWords].concat(deletedChip));
+    setSearchText("");
+    setRecipes(recipes);
+    setSearchWordSelections(chipSelections);
+  };
+
   const conditionalListRendering = () => {
     return searchText ? (
       <SearchWordList
@@ -87,7 +118,10 @@ const LandingPage = () => {
         searchText={searchText}
         onSearchTextChange={onSearchTextChange}
       />
-      <SearchWordChipList searchWordSelections={searchWordSelections} />
+      <SearchWordChipList
+        searchWordSelections={searchWordSelections}
+        chipDeleteHandler={chipDeleteHandler}
+      />
       {conditionalListRendering()}
     </Container>
   );

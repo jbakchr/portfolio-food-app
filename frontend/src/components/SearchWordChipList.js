@@ -2,10 +2,16 @@ import React from "react";
 
 import SearchWordChip from "./SearchWordChip";
 
-const SearchWordChipList = ({ searchWordSelections }) => {
+const SearchWordChipList = ({ searchWordSelections, chipDeleteHandler }) => {
   const renderSearchWordChips = () => {
-    return searchWordSelections.map((el) => {
-      return <SearchWordChip key={el.search_word} label={el.search_word} />;
+    return searchWordSelections.map((el, index) => {
+      return (
+        <SearchWordChip
+          key={el.search_word}
+          label={el.search_word}
+          chipDeleteHandler={() => chipDeleteHandler(index)}
+        />
+      );
     });
   };
 
