@@ -8,6 +8,8 @@ import SearchWordChipList from "../components/SearchWordChipList";
 import SearchWordList from "../components/SearchWordList";
 import RecipeList from "../components/RecipeList";
 
+import axiosInstance from "../utils/axios-instance";
+
 const LandingPage = () => {
   const [searchWords, setSearchWords] = useState([]);
   const [searchText, setSearchText] = useState("");
