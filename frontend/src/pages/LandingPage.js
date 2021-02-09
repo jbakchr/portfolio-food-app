@@ -33,7 +33,6 @@ const LandingPage = () => {
     setSearchText(text);
   };
 
-  // TODO: fix error handling
   const searchWordClickHandler = async (index) => {
     // When a search word is clicked we first create a copy of the present
     // search words and from here extract the clicked search word
@@ -57,8 +56,6 @@ const LandingPage = () => {
       .map((el) => el.search_word)
       .concat(clickedSearchWord[0].search_word);
 
-    console.log("pres sws:", presentSearchWordSelections);
-
     // And then we send our request to the backend with the selections as a string
     try {
       const { data } = await axios.get("http://localhost:5000/api/recipes", {
@@ -66,7 +63,6 @@ const LandingPage = () => {
           q: presentSearchWordSelections,
         },
       });
-      console.log("fetched recipes", data);
       return data;
     } catch (error) {
       console.log(error);
@@ -81,7 +77,7 @@ const LandingPage = () => {
         searchWordClickHandler={searchWordClickHandler}
       />
     ) : (
-      <RecipeList />
+      <RecipeList recipes={recipes} />
     );
   };
 
