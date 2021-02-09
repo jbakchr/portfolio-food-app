@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "@material-ui/core";
-import axios from "axios";
 
 import Navbar from "../components/Navbar";
 import SearchField from "../components/SearchField";
@@ -22,9 +21,7 @@ const LandingPage = () => {
 
   const fetchSearchWords = async () => {
     try {
-      const { data } = await axios.get(
-        "http://localhost:5000/api/search-words"
-      );
+      const { data } = await axiosInstance.get("search-words");
       setSearchWords(data);
     } catch (error) {
       console.log(error);
@@ -60,7 +57,7 @@ const LandingPage = () => {
 
     // And then we send our request to the backend with the selections as a string
     try {
-      const { data } = await axios.get("http://localhost:5000/api/recipes", {
+      const { data } = await axiosInstance.get("recipes", {
         params: {
           q: presentSearchWordSelections,
         },
