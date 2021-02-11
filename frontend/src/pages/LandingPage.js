@@ -22,6 +22,7 @@ const LandingPage = () => {
   const fetchSearchWords = async () => {
     try {
       const { data } = await axiosInstance.get("search-words");
+      console.log("data", data);
       setSearchWords(data);
     } catch (error) {
       console.log(error);
