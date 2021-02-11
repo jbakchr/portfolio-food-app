@@ -2,5 +2,17 @@
   {
     "foodtypeId": 1,
     "recipeId": 1
+  },
+  {
+    "foodtypeId": 1,
+    "recipeId": 2
+  },
+  {
+    "foodtypeId": 2,
+    "recipeId": 3
+  },
+  {
+    "foodtypeId": 3,
+    "recipeId": 3
   }
 ]

@@ -1,5 +1,11 @@
 [
   {
     "foodtype": "tilbehør"
+  },
+  {
+    "foodtype": "kager"
+  },
+  {
+    "foodtype": "muffins"
   }
 ]
