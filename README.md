@@ -17,7 +17,7 @@ docker
 
 ### Clone project
 
-Clone this project by running and 'cd' into it
+Clone this project and 'cd' into it by running
 
 ```
 git clone https://github.com/jbakchr/portfolio-food-app.git
@@ -30,4 +30,12 @@ Just run the following command in order to spin up the entire project
 
 ```
 docker-compose up
+```
+
+### Tear down project
+
+Once finished with this project (as if that'll ever happen.. ha!) just run
+
+```
+docker-compose down
 ```
