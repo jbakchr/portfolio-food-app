@@ -6,6 +6,11 @@ const Recipe = require("../models/Recipe");
 const Ingredient = db.define(
   "ingredient",
   {
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "ingredient",
+    },
     ingredient: DataTypes.STRING,
   },
   {

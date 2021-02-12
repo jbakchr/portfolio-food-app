@@ -12,10 +12,10 @@ router.get("/", async (req, res, next) => {
 
     // Data
     const ingredients = await Ingredient.findAll({
-      attributes: [["ingredient", "search_word"]],
+      attributes: ["type", ["ingredient", "search_word"]],
     });
     const foodtypes = await FoodType.findAll({
-      attributes: [["foodtype", "search_word"]],
+      attributes: ["type", ["foodtype", "search_word"]],
     });
 
     searchWords.push(...ingredients, ...foodtypes);
