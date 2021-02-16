@@ -66,18 +66,17 @@ const LandingPage = () => {
   };
 
   const chipDeleteHandler = async (index) => {
-    // When a search word chip is clicked for deletion then we first remove
-    // the clicked chip from the present selection of search word chips
+    // Extract chip selection and deleted chip
     const chipSelections = [...searchWordSelections];
     const deletedChip = chipSelections.splice(index, 1);
 
-    // Then we check if any chips is left and if so fetch new recipes
+    // Fetch recipes
     let recipes = [];
     if (chipSelections.length > 0) {
       try {
         const { data } = await axiosInstance.get("recipes", {
           params: {
-            q: chipSelections.map((el) => el.search_word),
+            q: JSON.stringify(chipSelections),
           },
         });
         recipes = data;
@@ -86,11 +85,7 @@ const LandingPage = () => {
       }
     }
 
-    // Finally we:
-    //  - transfer the "deleted" chip back to the list of search words
-    //  - clear the search field
-    //  - set the new array of recipes
-    //  - set the new array of search word chips
+    // Set state
     setSearchWords([...searchWords].concat(deletedChip));
     setSearchText("");
     setRecipes(recipes);
