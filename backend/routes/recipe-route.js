@@ -1,5 +1,5 @@
 const express = require("express");
-const { QueryTypes, where } = require("sequelize");
+const { QueryTypes } = require("sequelize");
 
 const db = require("../db/db");
 
