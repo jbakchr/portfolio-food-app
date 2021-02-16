@@ -22,7 +22,7 @@ const LandingPage = () => {
   const fetchSearchWords = async () => {
     try {
       const { data } = await axiosInstance.get("search-words");
-      console.log("data", data);
+      console.log("fetched search words:", data);
       setSearchWords(data);
     } catch (error) {
       console.log(error);
@@ -49,18 +49,10 @@ const LandingPage = () => {
   };
 
   const fetchRecipes = async (clickedSearchWord) => {
-    console.log(clickedSearchWord);
-    // When fetching recipes we first map over each of the present search word
-    // selections and concatenate the clicked search word
-    // const presentSearchWordSelections = [...searchWordSelections]
-    //   .map((el) => el.search_word)
-    //   .concat(clickedSearchWord[0].search_word);
-
     let presentSearchWordSelections = [...searchWordSelections].concat(
       clickedSearchWord
     );
 
-    // And then we send our request to the backend with the selections as a string
     try {
       const { data } = await axiosInstance.get("recipes", {
         params: {
