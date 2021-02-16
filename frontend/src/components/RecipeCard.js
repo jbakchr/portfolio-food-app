@@ -9,7 +9,7 @@ import {
 
 const RecipeCard = ({ recipe }) => {
   return (
-    <Card style={{ margin: 20 }}>
+    <Card style={{ margin: 20, border: "2px solid lightgrey" }}>
       <CardHeader title={recipe.recipe} />
       <Divider />
       <CardContent>
