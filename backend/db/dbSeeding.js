@@ -4,6 +4,7 @@ const db = require("../db/db");
 const Ingredient = require("../models/Ingredient");
 const FoodType = require("../models/FoodType");
 const Recipe = require("../models/Recipe");
+const User = require("../models/User");
 
 // Data
 const recipes = require("../data/recipes.json");
@@ -13,6 +14,8 @@ const ingredients_recipes = require("../data/ingredients-recipes.json");
 
 const foodtypes = require("../data/foodtypes.json");
 const foodtypes_recipes = require("../data/foodtypes-recipes.json");
+
+const users = require("../data/users.json");
 
 const dbSeeding = async () => {
   try {
@@ -24,6 +27,9 @@ const dbSeeding = async () => {
     // FoodTypes - Recipes
     await FoodType.bulkCreate(foodtypes);
     await db.models.foodtypes_recipes.bulkCreate(foodtypes_recipes);
+
+    // Users
+    await User.bulkCreate(users);
   } catch (error) {
     console.log(error);
   }
