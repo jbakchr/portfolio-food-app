@@ -8,6 +8,10 @@ const SearchWordList = ({
   searchWords,
   searchWordClickHandler,
 }) => {
+  if (!searchText) {
+    return null;
+  }
+
   const renderListItems = () => {
     if (searchText) {
       return searchWords.map((el, index) => {

@@ -92,18 +92,6 @@ const LandingPage = () => {
     setSearchWordSelections(chipSelections);
   };
 
-  const conditionalListRendering = () => {
-    return searchText ? (
-      <SearchWordList
-        searchText={searchText}
-        searchWords={searchWords}
-        searchWordClickHandler={searchWordClickHandler}
-      />
-    ) : (
-      <RecipeList recipes={recipes} />
-    );
-  };
-
   return (
     <Container maxWidth="lg">
       <Navbar />
@@ -115,7 +103,12 @@ const LandingPage = () => {
         searchWordSelections={searchWordSelections}
         chipDeleteHandler={chipDeleteHandler}
       />
-      {conditionalListRendering()}
+      <SearchWordList
+        searchText={searchText}
+        searchWords={searchWords}
+        searchWordClickHandler={searchWordClickHandler}
+      />
+      <RecipeList searchText={searchText} recipes={recipes} />
     </Container>
   );
 };
