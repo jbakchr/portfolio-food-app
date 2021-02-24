@@ -1,10 +1,14 @@
 import React from "react";
-import { Container } from "@material-ui/core";
+import { Container, TextField, Button } from "@material-ui/core";
 
 const SignUpPage = () => {
   return (
     <Container maxWidth="lg">
-      <p>Made it to Sign Up</p>
+      <TextField label="Email" fullWidth />
+      <TextField label="Password" fullWidth />
+      <Button variant="contained" color="primary">
+        Sign up
+      </Button>
     </Container>
   );
 };
