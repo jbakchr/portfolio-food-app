@@ -35,11 +35,11 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Switch>
-        <Route exact path="/">
-          <LandingPage />
-        </Route>
         <Route path="/signup">
           <SignUpPage signUp={signUp} />
+        </Route>
+        <Route exact path="/">
+          <LandingPage />
         </Route>
       </Switch>
     </BrowserRouter>
