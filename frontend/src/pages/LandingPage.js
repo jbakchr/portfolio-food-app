@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "@material-ui/core";
 
-import Navbar from "../components/Navbar";
 import SearchField from "../components/SearchField";
 import SearchWordChipList from "../components/SearchWordChipList";
 import SearchWordList from "../components/SearchWordList";
