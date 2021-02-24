@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Container, TextField, Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const SignUpPage = ({ signUp }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   return (
     <Container maxWidth="lg">
@@ -21,7 +23,10 @@ const SignUpPage = ({ signUp }) => {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => signUp(email, password)}
+        onClick={async () => {
+          await signUp(email, password);
+          history.push("/");
+        }}
       >
         Sign up
       </Button>

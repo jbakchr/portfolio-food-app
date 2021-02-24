@@ -31,6 +31,9 @@ function App() {
     }
   };
 
+  console.log("userId:", userId);
+  console.log("token:", token);
+
   return (
     <BrowserRouter>
       <Navbar />
