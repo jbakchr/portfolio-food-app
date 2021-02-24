@@ -1,13 +1,34 @@
+import React, { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 import SignUpPage from "./pages/SignUpPage";
 
+import axiosInstance from "./utils/axios-instance";
+
 function App() {
-  const signUp = (email, password) => {
-    console.log("email:", email);
-    console.log("password:", password);
+  const [userId, setUserId] = useState(null);
+  const [token, setToken] = useState(null);
+
+  const signUp = async (email, password) => {
+    try {
+      let { data } = await axiosInstance.post("/auth/signup", {
+        email,
+        password,
+      });
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          userId: data.userId,
+          token: data.token,
+        })
+      );
+      setUserId(data.userId);
+      setToken(data.token);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
