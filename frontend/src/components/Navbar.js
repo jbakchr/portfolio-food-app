@@ -22,6 +22,12 @@ const Navbar = () => {
             <Typography variant="h6" className={classes.title}>
               VasGo
             </Typography>
+            <Typography
+              style={{ cursor: "pointer" }}
+              onClick={() => console.log("Going to sign up")}
+            >
+              Sign up / Login
+            </Typography>
           </Toolbar>
         </Container>
       </AppBar>
