@@ -8,11 +8,29 @@ router.post("/signup", async (req, res, next) => {
   // Get email and password
   const { email, password } = req.body;
 
-  if (userExists(email, password)) res.json({ email, password });
+  let existingUser = await userExists(email, res);
+  console.log("in signup:", existingUser);
+
+  res.json({ email, password });
 });
 
-const userExists = (email, password) => {
-  return null;
+const userExists = async (email, res) => {
+  let existingUser;
+  try {
+    existingUser = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Logging in failed, please try again later.'" });
+  }
+
+  console.log("in userExists:", existingUser);
+
+  return existingUser;
 };
 
 module.exports = router;
