@@ -94,7 +94,6 @@ const LandingPage = () => {
 
   return (
     <Container maxWidth="lg">
-      <Navbar />
       <SearchField
         searchText={searchText}
         onSearchTextChange={onSearchTextChange}
