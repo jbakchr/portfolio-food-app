@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Container, Toolbar, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,11 +23,13 @@ const Navbar = () => {
             <Typography variant="h6" className={classes.title}>
               VasGo
             </Typography>
-            <Typography
-              style={{ cursor: "pointer" }}
-              onClick={() => console.log("Going to sign up")}
-            >
-              Sign up / Login
+            <Typography style={{ cursor: "pointer" }}>
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                to="/signup"
+              >
+                Sign up / Login
+              </Link>
             </Typography>
           </Toolbar>
         </Container>
