@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -10,6 +10,15 @@ import axiosInstance from "./utils/axios-instance";
 function App() {
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    // Get item from localStorage and set result on state
+    let userData = JSON.parse(localStorage.getItem("userData"));
+    if (userData) {
+      setUserId(userData.userId);
+      setToken(userData.token);
+    }
+  }, []);
 
   const signUp = async (email, password) => {
     try {
@@ -30,9 +39,6 @@ function App() {
       console.log(error);
     }
   };
-
-  console.log("userId:", userId);
-  console.log("token:", token);
 
   return (
     <BrowserRouter>
