@@ -20,7 +20,13 @@ const Navbar = ({ token, logOut }) => {
         Logout
       </Typography>
     ) : (
-      <>
+      <div
+        style={{
+          display: "flex",
+          width: "10%",
+          justifyContent: "space-between",
+        }}
+      >
         <Typography style={{ cursor: "pointer" }}>
           <Link style={{ textDecoration: "none", color: "white" }} to="/signup">
             Sign up
@@ -31,7 +37,7 @@ const Navbar = ({ token, logOut }) => {
             Log in
           </Link>
         </Typography>
-      </>
+      </div>
     );
   };
 
