@@ -12,12 +12,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = ({ token }) => {
+const Navbar = ({ token, logOut }) => {
   const classes = useStyles();
 
   const getNavbarButton = () => {
     return token ? (
-      <Typography style={{ cursor: "pointer" }}>Logout</Typography>
+      <Typography style={{ cursor: "pointer" }} onClick={logOut}>
+        Logout
+      </Typography>
     ) : (
       <Typography style={{ cursor: "pointer" }}>
         <Link style={{ textDecoration: "none", color: "white" }} to="/signup">

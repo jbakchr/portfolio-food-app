@@ -40,9 +40,17 @@ function App() {
     }
   };
 
+  const logOut = () => {
+    console.log("log out");
+    // Remove item from localStorage
+    localStorage.removeItem("userData");
+    setToken(null);
+    setUserId(null);
+  };
+
   return (
     <BrowserRouter>
-      <Navbar token={token} />
+      <Navbar token={token} logOut={logOut} />
       <Switch>
         <Route path="/signup">
           <SignUpPage signUp={signUp} />
