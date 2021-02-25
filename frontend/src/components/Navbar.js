@@ -21,11 +21,18 @@ const Navbar = ({ token, logOut }) => {
         Logout
       </Typography>
     ) : (
-      <Typography style={{ cursor: "pointer" }}>
-        <Link style={{ textDecoration: "none", color: "white" }} to="/signup">
-          Sign up / Login
-        </Link>
-      </Typography>
+      <>
+        <Typography style={{ cursor: "pointer" }}>
+          <Link style={{ textDecoration: "none", color: "white" }} to="/signup">
+            Sign up
+          </Link>
+        </Typography>
+        <Typography style={{ cursor: "pointer" }}>
+          <Link style={{ textDecoration: "none", color: "white" }} to="/login">
+            Log in
+          </Link>
+        </Typography>
+      </>
     );
   };
 
