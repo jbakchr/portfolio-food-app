@@ -41,9 +41,27 @@ function App() {
     }
   };
 
-  const logIn = (email, password) => {
+  const logIn = async (email, password) => {
     console.log("loggin in ..");
     console.log(email, password);
+
+    try {
+      const { data } = await axiosInstance.post("/auth/login", {
+        email,
+        password,
+      });
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          userId: data.userId,
+          token: data.token,
+        })
+      );
+      setUserId(data.userId);
+      setToken(data.token);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const logOut = () => {

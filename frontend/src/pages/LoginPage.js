@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Button, Container, TextField } from "@material-ui/core";
 
 const LoginPage = ({ logIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   return (
     <Container maxWidth="lg">
@@ -21,7 +23,10 @@ const LoginPage = ({ logIn }) => {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => logIn(email, password)}
+        onClick={async () => {
+          await logIn(email, password);
+          history.push("/");
+        }}
       >
         Log in
       </Button>
