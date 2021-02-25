@@ -3,11 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Container, Toolbar, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
+import NavbarBrandButton from "./NavbarBrandButton";
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-  },
-  title: {
     flexGrow: 1,
   },
 }));
@@ -41,18 +40,7 @@ const Navbar = ({ token, logOut }) => {
       <AppBar>
         <Container maxWidth="lg">
           <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              <Link
-                style={{
-                  textDecoration: "none",
-                  cursor: "pointer",
-                  color: "white",
-                }}
-                to="/"
-              >
-                VasGo
-              </Link>
-            </Typography>
+            <NavbarBrandButton />
             {getNavbarButton()}
           </Toolbar>
         </Container>
