@@ -1,3 +1,6 @@
+const bcrypt = require("bcryptjs");
+
+// DB
 const db = require("../db/db");
 
 // Models
@@ -29,7 +32,11 @@ const dbSeeding = async () => {
     await db.models.foodtypes_recipes.bulkCreate(foodtypes_recipes);
 
     // Users
-    await User.bulkCreate(users);
+    let hashedPassword = await bcrypt.hash(users[0].password, 12);
+    await User.create({
+      email: users[0].email,
+      password: hashedPassword,
+    });
   } catch (error) {
     console.log(error);
   }
