@@ -42,9 +42,6 @@ function App() {
   };
 
   const logIn = async (email, password) => {
-    console.log("loggin in ..");
-    console.log(email, password);
-
     try {
       const { data } = await axiosInstance.post("/auth/login", {
         email,
