@@ -47,7 +47,6 @@ router.post("/login", async (req, res, next) => {
 
   // Get token
   let token = await getToken(existingUser, res);
-  console.log("token", token);
 
   res.json({ userId: existingUser.id, token });
 });
