@@ -24,7 +24,32 @@ router.post("/signup", async (req, res, next) => {
   // Get token
   const token = await getToken(createdUser, res);
 
-  res.json({ userId: createdUser.id, token });
+  res.status(201).json({ userId: createdUser.id, token });
+});
+
+router.post("/login", async (req, res, next) => {
+  // Get email and password
+  const { email, password } = req.body;
+
+  // Check if user already exists
+  let existingUser = await userExists(email, res);
+  if (!existingUser) {
+    // TODO: Change status code to correct one ..
+    return res.status(500).json({ msg: "No user exists" });
+  }
+
+  // Check if password is valid
+  if (await !checkPassword(password, existingUser.password, res)) {
+    return res
+      .status(403)
+      .json({ message: "Invalid credentials, could not log you in." });
+  }
+
+  // Get token
+  let token = await getToken(existingUser, res);
+  console.log("token", token);
+
+  res.json({ userId: existingUser.id, token });
 });
 
 const userExists = async (email, res) => {
@@ -56,6 +81,19 @@ const hashPassword = async (password, res) => {
   return hashedPassword;
 };
 
+const checkPassword = async (password, existingPassword, res) => {
+  let isValidPassword;
+  try {
+    isValidPassword = await bcrypt.compare(password, existingPassword);
+  } catch (error) {
+    return res.status(500).json({
+      message:
+        "Could not log you in, please check your credentials and try again.",
+    });
+  }
+  return isValidPassword;
+};
+
 const createUser = async (email, hashedPassword, res) => {
   let createdUser;
   try {
@@ -72,10 +110,10 @@ const createUser = async (email, hashedPassword, res) => {
   return createdUser;
 };
 
-const getToken = async (createdUser, res) => {
+const getToken = async (user, res) => {
   let token;
   try {
-    token = await jwt.sign({ userId: createdUser.id }, "super_duper_secret", {
+    token = await jwt.sign({ userId: user.id }, "super_duper_secret", {
       expiresIn: "1h",
     });
   } catch (error) {
