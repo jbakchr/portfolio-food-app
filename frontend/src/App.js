@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
 
 import axiosInstance from "./utils/axios-instance";
 
@@ -40,6 +41,11 @@ function App() {
     }
   };
 
+  const logIn = (email, password) => {
+    console.log("loggin in ..");
+    console.log(email, password);
+  };
+
   const logOut = () => {
     console.log("log out");
     // Remove item from localStorage
@@ -54,6 +60,9 @@ function App() {
       <Switch>
         <Route path="/signup">
           <SignUpPage signUp={signUp} />
+        </Route>
+        <Route path="/login">
+          <LoginPage logIn={logIn} />
         </Route>
         <Route exact path="/">
           <LandingPage />
