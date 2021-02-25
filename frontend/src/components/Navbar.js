@@ -35,7 +35,16 @@ const Navbar = ({ token, logOut }) => {
         <Container maxWidth="lg">
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-              VasGo
+              <Link
+                style={{
+                  textDecoration: "none",
+                  cursor: "pointer",
+                  color: "white",
+                }}
+                to="/"
+              >
+                VasGo
+              </Link>
             </Typography>
             {getNavbarButton()}
           </Toolbar>
