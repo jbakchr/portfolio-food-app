@@ -36,7 +36,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar token={token} />
       <Switch>
         <Route path="/signup">
           <SignUpPage signUp={signUp} />

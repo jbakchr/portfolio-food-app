@@ -12,8 +12,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = ({ token }) => {
   const classes = useStyles();
+
+  const getNavbarButton = () => {
+    return token ? (
+      <Typography style={{ cursor: "pointer" }}>Logout</Typography>
+    ) : (
+      <Typography style={{ cursor: "pointer" }}>
+        <Link style={{ textDecoration: "none", color: "white" }} to="/signup">
+          Sign up / Login
+        </Link>
+      </Typography>
+    );
+  };
 
   return (
     <div className={classes.root}>
@@ -23,14 +35,7 @@ const Navbar = () => {
             <Typography variant="h6" className={classes.title}>
               VasGo
             </Typography>
-            <Typography style={{ cursor: "pointer" }}>
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                to="/signup"
-              >
-                Sign up / Login
-              </Link>
-            </Typography>
+            {getNavbarButton()}
           </Toolbar>
         </Container>
       </AppBar>
