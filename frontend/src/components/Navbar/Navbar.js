@@ -1,9 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Container, Toolbar, Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
 import NavbarBrandButton from "./NavbarBrandButton";
+import NavbarAuthButtons from "./NavbarAuthButtons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,24 +20,7 @@ const Navbar = ({ token, logOut }) => {
         Logout
       </Typography>
     ) : (
-      <div
-        style={{
-          display: "flex",
-          width: "10%",
-          justifyContent: "space-between",
-        }}
-      >
-        <Typography style={{ cursor: "pointer" }}>
-          <Link style={{ textDecoration: "none", color: "white" }} to="/signup">
-            Sign up
-          </Link>
-        </Typography>
-        <Typography style={{ cursor: "pointer" }}>
-          <Link style={{ textDecoration: "none", color: "white" }} to="/login">
-            Log in
-          </Link>
-        </Typography>
-      </div>
+      <NavbarAuthButtons />
     );
   };
 
