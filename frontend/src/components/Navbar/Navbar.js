@@ -1,8 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Container, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Container, Toolbar } from "@material-ui/core";
 
 import NavbarBrandButton from "./NavbarBrandButton";
+import NavbarAccountButton from "./NavbarAccountButton";
 import NavbarAuthButtons from "./NavbarAuthButtons";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,10 +17,11 @@ const Navbar = ({ token, logOut }) => {
 
   const getNavbarButton = () => {
     return token ? (
-      <Typography style={{ cursor: "pointer" }} onClick={logOut}>
-        Logout
-      </Typography>
+      <NavbarAccountButton logOut={logOut} />
     ) : (
+      // <Typography style={{ cursor: "pointer" }} onClick={logOut}>
+      //   Logout
+      // </Typography>
       <NavbarAuthButtons />
     );
   };
