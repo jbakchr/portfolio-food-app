@@ -10,6 +10,7 @@ import axiosInstance from "./utils/axios-instance";
 
 function App() {
   const [token, setToken] = useState(null);
+  const [searchWords, setSearchWords] = useState([]);
 
   useEffect(() => {
     // Get item from localStorage and set result on state
@@ -17,7 +18,20 @@ function App() {
     if (userData) {
       setToken(userData.token);
     }
+
+    // Fetch search words
+    fetchSearchWords();
   }, []);
+
+  const fetchSearchWords = async () => {
+    try {
+      const { data } = await axiosInstance.get("search-words");
+      console.log("fetched search words:", data);
+      setSearchWords(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const signUp = async (email, password) => {
     try {
@@ -60,6 +74,10 @@ function App() {
     setToken(null);
   };
 
+  const addSearchWords = (searchWordCopy) => {
+    setSearchWords(searchWordCopy);
+  };
+
   return (
     <BrowserRouter>
       <Navbar token={token} logOut={logOut} />
@@ -71,7 +89,10 @@ function App() {
           <LoginPage logIn={logIn} />
         </Route>
         <Route exact path="/">
-          <LandingPage />
+          <LandingPage
+            searchWords={searchWords}
+            addSearchWords={addSearchWords}
+          />
         </Route>
       </Switch>
     </BrowserRouter>

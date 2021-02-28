@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container } from "@material-ui/core";
 
 import SearchField from "../components/SearchField";
@@ -8,25 +8,10 @@ import RecipeList from "../components/RecipeList";
 
 import axiosInstance from "../utils/axios-instance";
 
-const LandingPage = () => {
-  const [searchWords, setSearchWords] = useState([]);
+const LandingPage = ({ searchWords, addSearchWords }) => {
   const [searchText, setSearchText] = useState("");
   const [searchWordSelections, setSearchWordSelections] = useState([]);
   const [recipes, setRecipes] = useState([]);
-
-  useEffect(() => {
-    fetchSearchWords();
-  }, []);
-
-  const fetchSearchWords = async () => {
-    try {
-      const { data } = await axiosInstance.get("search-words");
-      console.log("fetched search words:", data);
-      setSearchWords(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const onSearchTextChange = (text) => {
     setSearchText(text);
@@ -41,7 +26,7 @@ const LandingPage = () => {
     let recipes = await fetchRecipes(clickedSearchWord);
 
     // Set state
-    setSearchWords(searchWordsCopy);
+    addSearchWords(searchWordsCopy);
     setSearchWordSelections(searchWordSelections.concat(clickedSearchWord));
     setSearchText("");
     setRecipes(recipes);
@@ -85,7 +70,7 @@ const LandingPage = () => {
     }
 
     // Set state
-    setSearchWords([...searchWords].concat(deletedChip));
+    addSearchWords([...searchWords].concat(deletedChip));
     setSearchText("");
     setRecipes(recipes);
     setSearchWordSelections(chipSelections);
