@@ -11,7 +11,6 @@ const NavbarAccountButton = ({ logOut }) => {
 
   const handleClose = async () => {
     await setAnchorEl(null);
-    // logOut();
   };
 
   const open = Boolean(anchorEl);
@@ -31,11 +30,11 @@ const NavbarAccountButton = ({ logOut }) => {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center",
+          horizontal: "right",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center",
+          horizontal: "right",
         }}
       >
         <Typography>The content of the Popover.</Typography>

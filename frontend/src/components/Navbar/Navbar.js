@@ -19,9 +19,6 @@ const Navbar = ({ token, logOut }) => {
     return token ? (
       <NavbarAccountButton logOut={logOut} />
     ) : (
-      // <Typography style={{ cursor: "pointer" }} onClick={logOut}>
-      //   Logout
-      // </Typography>
       <NavbarAuthButtons />
     );
   };
