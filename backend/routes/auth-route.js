@@ -24,7 +24,7 @@ router.post("/signup", async (req, res, next) => {
   // Get token
   const token = await getToken(createdUser, res);
 
-  res.status(201).json({ userId: createdUser.id, token });
+  res.status(201).json({ token });
 });
 
 router.post("/login", async (req, res, next) => {

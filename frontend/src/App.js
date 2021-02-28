@@ -9,14 +9,12 @@ import LoginPage from "./pages/LoginPage";
 import axiosInstance from "./utils/axios-instance";
 
 function App() {
-  const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
 
   useEffect(() => {
     // Get item from localStorage and set result on state
     let userData = JSON.parse(localStorage.getItem("userData"));
     if (userData) {
-      setUserId(userData.userId);
       setToken(userData.token);
     }
   }, []);
@@ -30,11 +28,9 @@ function App() {
       localStorage.setItem(
         "userData",
         JSON.stringify({
-          userId: data.userId,
           token: data.token,
         })
       );
-      setUserId(data.userId);
       setToken(data.token);
     } catch (error) {
       console.log(error);
@@ -50,11 +46,9 @@ function App() {
       localStorage.setItem(
         "userData",
         JSON.stringify({
-          userId: data.userId,
           token: data.token,
         })
       );
-      setUserId(data.userId);
       setToken(data.token);
     } catch (error) {
       console.log(error);
@@ -64,7 +58,6 @@ function App() {
   const logOut = () => {
     localStorage.removeItem("userData");
     setToken(null);
-    setUserId(null);
   };
 
   return (
@@ -77,7 +70,7 @@ function App() {
         <Route path="/login">
           <LoginPage logIn={logIn} />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <LandingPage />
         </Route>
       </Switch>
