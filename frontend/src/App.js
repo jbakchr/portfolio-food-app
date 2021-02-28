@@ -62,8 +62,6 @@ function App() {
   };
 
   const logOut = () => {
-    console.log("log out");
-    // Remove item from localStorage
     localStorage.removeItem("userData");
     setToken(null);
     setUserId(null);
@@ -79,7 +77,7 @@ function App() {
         <Route path="/login">
           <LoginPage logIn={logIn} />
         </Route>
-        <Route exact path="/">
+        <Route path="/">
           <LandingPage />
         </Route>
       </Switch>

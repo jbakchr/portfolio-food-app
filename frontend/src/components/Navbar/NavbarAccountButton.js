@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AccountCircle } from "@material-ui/icons";
-import { Popover, Typography } from "@material-ui/core";
+import { List, Popover, ListItem, ListItemText } from "@material-ui/core";
 
 const NavbarAccountButton = ({ logOut }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -37,7 +37,14 @@ const NavbarAccountButton = ({ logOut }) => {
           horizontal: "right",
         }}
       >
-        <Typography>The content of the Popover.</Typography>
+        <List>
+          <ListItem button>
+            <ListItemText primary="Min profil" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Log ud" onClick={logOut} />
+          </ListItem>
+        </List>
       </Popover>
     </div>
   );
