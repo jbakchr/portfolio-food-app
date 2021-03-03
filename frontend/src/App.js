@@ -29,7 +29,6 @@ function App() {
   const fetchSearchWords = async () => {
     try {
       const { data } = await axiosInstance.get("search-words");
-      console.log("fetched search words:", data);
       setSearchWords(data);
     } catch (error) {
       console.log(error);
@@ -42,7 +41,6 @@ function App() {
         email,
         password,
       });
-      console.log(data);
       localStorage.setItem(
         "userData",
         JSON.stringify({
@@ -63,7 +61,6 @@ function App() {
         email,
         password,
       });
-      console.log(data);
       localStorage.setItem(
         "userData",
         JSON.stringify({
@@ -124,8 +121,6 @@ function App() {
     }
     return routes;
   };
-
-  console.log("userId", userId);
 
   return (
     <BrowserRouter>
