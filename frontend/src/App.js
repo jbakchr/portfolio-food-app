@@ -63,12 +63,15 @@ function App() {
         email,
         password,
       });
+      console.log(data);
       localStorage.setItem(
         "userData",
         JSON.stringify({
+          userId: data.userId,
           token: data.token,
         })
       );
+      setUserId(data.userId);
       setToken(data.token);
     } catch (error) {
       console.log(error);
@@ -77,6 +80,7 @@ function App() {
 
   const logOut = () => {
     localStorage.removeItem("userData");
+    setUserId(null);
     setToken(null);
   };
 

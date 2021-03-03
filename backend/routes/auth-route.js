@@ -20,7 +20,6 @@ router.post("/signup", async (req, res, next) => {
 
   // Create user
   const createdUser = await createUser(email, hashedPassword, res);
-  console.log("created user:", createdUser);
 
   // Get token
   const token = await getToken(createdUser, res);
