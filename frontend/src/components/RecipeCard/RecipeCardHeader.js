@@ -2,7 +2,8 @@ import React from "react";
 import { CardHeader, CardActions, IconButton } from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
-const RecipeCardHeader = ({ title }) => {
+const RecipeCardHeader = ({ userId, title }) => {
+  console.log("user id:", userId);
   return (
     <div
       style={{

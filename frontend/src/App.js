@@ -95,6 +95,7 @@ function App() {
           </Route>
           <Route path="/">
             <LandingPage
+              userId={userId}
               searchWords={searchWords}
               addSearchWords={addSearchWords}
             />
@@ -112,6 +113,7 @@ function App() {
           </Route>
           <Route path="/">
             <LandingPage
+              userId={userId}
               searchWords={searchWords}
               addSearchWords={addSearchWords}
             />

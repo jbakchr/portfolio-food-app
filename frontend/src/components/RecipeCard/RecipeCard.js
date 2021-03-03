@@ -3,10 +3,10 @@ import { Card, CardContent, Divider, Typography } from "@material-ui/core";
 
 import RecipeCardHeader from "./RecipeCardHeader";
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ userId, recipe }) => {
   return (
     <Card style={{ margin: 20, border: "2px solid lightgrey" }}>
-      <RecipeCardHeader title={recipe.recipe} />
+      <RecipeCardHeader userId={userId} title={recipe.recipe} />
       <Divider />
       <CardContent>
         <Typography>Ingredienser:</Typography>

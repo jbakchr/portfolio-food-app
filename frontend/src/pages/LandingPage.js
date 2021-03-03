@@ -8,7 +8,7 @@ import RecipeList from "../components/RecipeList";
 
 import axiosInstance from "../utils/axios-instance";
 
-const LandingPage = ({ searchWords, addSearchWords }) => {
+const LandingPage = ({ userId, searchWords, addSearchWords }) => {
   const [searchText, setSearchText] = useState("");
   const [searchWordSelections, setSearchWordSelections] = useState([]);
   const [recipes, setRecipes] = useState([]);
@@ -91,7 +91,7 @@ const LandingPage = ({ searchWords, addSearchWords }) => {
         searchWords={searchWords}
         searchWordClickHandler={searchWordClickHandler}
       />
-      <RecipeList searchText={searchText} recipes={recipes} />
+      <RecipeList userId={userId} searchText={searchText} recipes={recipes} />
     </Container>
   );
 };

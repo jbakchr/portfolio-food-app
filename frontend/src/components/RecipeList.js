@@ -2,14 +2,14 @@ import React from "react";
 
 import RecipeCard from "./RecipeCard/RecipeCard";
 
-const RecipeList = ({ searchText, recipes }) => {
+const RecipeList = ({ userId, searchText, recipes }) => {
   if (searchText) {
     return null;
   }
 
   const renderRecipeCards = () => {
     return recipes.map((recipe) => {
-      return <RecipeCard key={recipe.recipe} recipe={recipe} />;
+      return <RecipeCard key={recipe.recipe} userId={userId} recipe={recipe} />;
     });
   };
 
