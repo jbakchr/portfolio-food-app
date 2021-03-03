@@ -10,6 +10,7 @@ import MyRecipesPage from "./pages/MyRecipesPage";
 import axiosInstance from "./utils/axios-instance";
 
 function App() {
+  const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
   const [searchWords, setSearchWords] = useState([]);
 
@@ -17,6 +18,7 @@ function App() {
     // Get item from localStorage and set result on state
     let userData = JSON.parse(localStorage.getItem("userData"));
     if (userData) {
+      setUserId(userData.userId);
       setToken(userData.token);
     }
 
@@ -40,12 +42,15 @@ function App() {
         email,
         password,
       });
+      console.log(data);
       localStorage.setItem(
         "userData",
         JSON.stringify({
+          userId: data.userId,
           token: data.token,
         })
       );
+      setUserId(data.userId);
       setToken(data.token);
     } catch (error) {
       console.log(error);
@@ -115,6 +120,8 @@ function App() {
     }
     return routes;
   };
+
+  console.log("userId", userId);
 
   return (
     <BrowserRouter>
