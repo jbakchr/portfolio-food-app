@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const searchWordRoute = require("./routes/search-word-route");
 const recipeRoute = require("./routes/recipe-route");
 const authRoute = require("./routes/auth-route");
+const userRoutes = require("./routes/user-routes");
 
 // DB
 const db = require("./db/db");
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 app.use("/api/search-words", searchWordRoute);
 app.use("/api/recipes", recipeRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/users", userRoutes);
 
 db.sync({ force: true })
   .then(() => {
