@@ -1,6 +1,6 @@
 import React from "react";
 
-import RecipeCard from "./RecipeCard";
+import RecipeCard from "./RecipeCard/RecipeCard";
 
 const RecipeList = ({ searchText, recipes }) => {
   if (searchText) {
