@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import Navbar from "./components/Navbar/Navbar";
 import LandingPage from "./pages/LandingPage";
@@ -78,23 +78,44 @@ function App() {
     setSearchWords(searchWordCopy);
   };
 
+  const getRoutes = () => {
+    let routes;
+    if (token) {
+      routes = (
+        <Switch>
+          <Route path="/">
+            <LandingPage
+              searchWords={searchWords}
+              addSearchWords={addSearchWords}
+            />
+          </Route>
+        </Switch>
+      );
+    } else {
+      routes = (
+        <Switch>
+          <Route path="/signup">
+            <SignUpPage signUp={signUp} />
+          </Route>
+          <Route path="/login">
+            <LoginPage logIn={logIn} />
+          </Route>
+          <Route path="/">
+            <LandingPage
+              searchWords={searchWords}
+              addSearchWords={addSearchWords}
+            />
+          </Route>
+        </Switch>
+      );
+    }
+    return routes;
+  };
+
   return (
     <BrowserRouter>
       <Navbar token={token} logOut={logOut} />
-      <Switch>
-        <Route path="/signup">
-          <SignUpPage signUp={signUp} />
-        </Route>
-        <Route path="/login">
-          <LoginPage logIn={logIn} />
-        </Route>
-        <Route exact path="/">
-          <LandingPage
-            searchWords={searchWords}
-            addSearchWords={addSearchWords}
-          />
-        </Route>
-      </Switch>
+      {getRoutes()}
     </BrowserRouter>
   );
 }
