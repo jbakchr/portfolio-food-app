@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { AccountCircle } from "@material-ui/icons";
-import { List, Popover, ListItem, ListItemText } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import {
+  List,
+  Popover,
+  ListItem,
+  ListItemText,
+  Divider,
+} from "@material-ui/core";
 
 const NavbarAccountButton = ({ logOut }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const history = useHistory();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -39,8 +47,12 @@ const NavbarAccountButton = ({ logOut }) => {
       >
         <List>
           <ListItem button>
-            <ListItemText primary="Min profil" />
+            <ListItemText
+              primary="Mine opskrifter"
+              onClick={() => history.push("/my-recipes")}
+            />
           </ListItem>
+          <Divider />
           <ListItem button>
             <ListItemText primary="Log ud" onClick={logOut} />
           </ListItem>

@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import LandingPage from "./pages/LandingPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
+import MyRecipesPage from "./pages/MyRecipesPage";
 
 import axiosInstance from "./utils/axios-instance";
 
@@ -83,6 +84,9 @@ function App() {
     if (token) {
       routes = (
         <Switch>
+          <Route path="/my-recipes">
+            <MyRecipesPage />
+          </Route>
           <Route path="/">
             <LandingPage
               searchWords={searchWords}
