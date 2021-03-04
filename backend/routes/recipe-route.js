@@ -7,8 +7,9 @@ const router = express.Router();
 
 router.get("/:userId", async (req, res, next) => {
   // Extract query
-  console.log(req.params.userId);
+  const userId = req.params.userId || 0;
   const query = JSON.parse(req.query.q);
+  console.log("userId:", userId);
 
   // Initialize arrays for possible query building
   let ingredientSearchWords = [];
@@ -41,7 +42,7 @@ router.get("/:userId", async (req, res, next) => {
 
   // Create SQL - NEW STUFF ..
   let sql = `
-    select r.*, SUM(IF(ur.userId = ${req.params.userId}, 1, 0)) AS 'liked_by_user'
+    select r.*, SUM(IF(ur.userId = ${userId}, 1, 0)) AS 'liked_by_user'
     from recipes AS r
     inner join users_recipes AS ur
       on r.id = ur.recipeId
