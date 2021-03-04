@@ -19,6 +19,7 @@ const foodtypes = require("../data/foodtypes.json");
 const foodtypes_recipes = require("../data/foodtypes-recipes.json");
 
 const users = require("../data/users.json");
+const users_recipes = require("../data/users-recipes.json");
 
 const dbSeeding = async () => {
   try {
@@ -37,6 +38,7 @@ const dbSeeding = async () => {
       email: users[0].email,
       password: hashedPassword,
     });
+    await db.models.users_recipes.bulkCreate(users_recipes);
   } catch (error) {
     console.log(error);
   }
