@@ -32,12 +32,14 @@ const dbSeeding = async () => {
     await FoodType.bulkCreate(foodtypes);
     await db.models.foodtypes_recipes.bulkCreate(foodtypes_recipes);
 
-    // Users
-    let hashedPassword = await bcrypt.hash(users[0].password, 12);
-    await User.create({
-      email: users[0].email,
-      password: hashedPassword,
+    // Users - Recipes
+    const listOfUsers = users.map((user) => {
+      return {
+        ...user,
+        password: bcrypt.hashSync(user.password, 12),
+      };
     });
+    await User.bulkCreate(listOfUsers);
     await db.models.users_recipes.bulkCreate(users_recipes);
   } catch (error) {
     console.log(error);

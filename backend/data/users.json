@@ -2,5 +2,9 @@
   {
     "email": "test",
     "password": "test"
+  },
+  {
+    "email": "bob",
+    "password": "bob"
   }
 ]
