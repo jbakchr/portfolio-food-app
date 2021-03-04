@@ -5,8 +5,9 @@ const db = require("../db/db");
 
 const router = express.Router();
 
-router.get("/", async (req, res, next) => {
+router.get("/:userId", async (req, res, next) => {
   // Extract query
+  console.log(req.params.userId);
   const query = JSON.parse(req.query.q);
 
   // Initialize arrays for possible query building
@@ -38,21 +39,42 @@ router.get("/", async (req, res, next) => {
     foodtypeSearchWords
   );
 
-  // Create SQL
+  // Create SQL - NEW STUFF ..
   let sql = `
-    SELECT r.*
-    FROM recipes AS r
-    ${ingredientInnerJoin}
-    ${foodtypeInnerJoin}
-    ${whereClause}
-    GROUP BY 1
-    ${havingClause}
-    ORDER BY 1
-  `;
+    select r.*, SUM(IF(ur.userId = ${req.params.userId}, 1, 0)) AS 'liked_by_user'
+    from recipes AS r
+    inner join users_recipes AS ur
+      on r.id = ur.recipeId
+    where r.id IN 
+    (
+      select r.id
+      from recipes as r
+      ${ingredientInnerJoin}
+      ${foodtypeInnerJoin}
+      ${whereClause}
+      group by 1
+      ${havingClause}
+      order by 1
+    )
+    group by 1;
+    `;
+
+  // Create SQL - OLD WORKING!!!
+  // let sql = `
+  //   SELECT r.*
+  //   FROM recipes AS r
+  //   ${ingredientInnerJoin}
+  //   ${foodtypeInnerJoin}
+  //   ${whereClause}
+  //   GROUP BY 1
+  //   ${havingClause}
+  //   ORDER BY 1
+  // `;
 
   // Execute sql
   try {
     const recipes = await db.query(sql, { type: QueryTypes.SELECT });
+    console.log("recipes", recipes);
     return res.json(recipes);
   } catch (error) {
     res.status(500).json({ msg: "Unable to fetch recipes" });

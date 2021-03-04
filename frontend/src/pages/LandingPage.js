@@ -21,9 +21,11 @@ const LandingPage = ({ userId, searchWords, addSearchWords }) => {
     // Extract clicked search word
     let searchWordsCopy = [...searchWords];
     const clickedSearchWord = searchWordsCopy.splice(index, 1);
+    console.log();
 
     // Fetch recipes
     let recipes = await fetchRecipes(clickedSearchWord);
+    console.log("fetched recipes:", recipes);
 
     // Set state
     addSearchWords(searchWordsCopy);
@@ -38,7 +40,7 @@ const LandingPage = ({ userId, searchWords, addSearchWords }) => {
     );
 
     try {
-      const { data } = await axiosInstance.get("recipes", {
+      const { data } = await axiosInstance.get(`recipes/${userId}`, {
         params: {
           q: JSON.stringify(presentSearchWordSelections),
         },

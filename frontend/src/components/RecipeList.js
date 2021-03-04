@@ -3,6 +3,7 @@ import React from "react";
 import RecipeCard from "./RecipeCard/RecipeCard";
 
 const RecipeList = ({ userId, searchText, recipes }) => {
+  console.log(recipes);
   if (searchText) {
     return null;
   }
