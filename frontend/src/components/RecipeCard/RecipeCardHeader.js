@@ -4,7 +4,6 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const RecipeCardHeader = ({ userId, title, liked_by_user }) => {
-  console.log("liked_by_user:", typeof liked_by_user);
   return (
     <div
       style={{

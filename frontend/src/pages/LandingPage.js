@@ -24,7 +24,6 @@ const LandingPage = ({ userId, searchWords, addSearchWords }) => {
 
     // Fetch recipes
     let recipes = await fetchRecipes(clickedSearchWord);
-    console.log("fetched recipes:", recipes);
 
     // Set state
     addSearchWords(searchWordsCopy);
