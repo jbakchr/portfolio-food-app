@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 const db = require("../db/db");
+const Recipe = require("./Recipe.js");
 
 const User = db.define(
   "user",
@@ -18,5 +19,7 @@ const User = db.define(
     timestamps: false,
   }
 );
+
+User.belongsToMany(Recipe, { through: "users_recipes", timestamps: false });
 
 module.exports = User;
