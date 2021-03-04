@@ -60,7 +60,7 @@ const LandingPage = ({ userId, searchWords, addSearchWords }) => {
     let recipes = [];
     if (chipSelections.length > 0) {
       try {
-        const { data } = await axiosInstance.get("recipes", {
+        const { data } = await axiosInstance.get(`recipes/${userId}`, {
           params: {
             q: JSON.stringify(chipSelections),
           },
