@@ -21,7 +21,6 @@ const LandingPage = ({ userId, searchWords, addSearchWords }) => {
     // Extract clicked search word
     let searchWordsCopy = [...searchWords];
     const clickedSearchWord = searchWordsCopy.splice(index, 1);
-    console.log();
 
     // Fetch recipes
     let recipes = await fetchRecipes(clickedSearchWord);

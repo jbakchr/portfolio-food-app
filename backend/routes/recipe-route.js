@@ -44,7 +44,7 @@ router.get("/:userId", async (req, res, next) => {
   let sql = `
     select r.*, SUM(IF(ur.userId = ${userId}, 1, 0)) AS 'liked_by_user'
     from recipes AS r
-    inner join users_recipes AS ur
+    left join users_recipes AS ur
       on r.id = ur.recipeId
     where r.id IN 
     (
