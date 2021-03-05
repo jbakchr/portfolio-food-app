@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
 
-const SearchField = ({ onSearchTextChange, searchText }) => {
+const SearchField = ({ onSearchTextChange, searchText, setSearchText }) => {
   return (
     <div
       style={{
@@ -19,7 +19,7 @@ const SearchField = ({ onSearchTextChange, searchText }) => {
         placeholder="Søg på ingredienser, måtid osv."
         type="search"
         InputProps={{ disableUnderline: true }}
-        onChange={(e) => onSearchTextChange(e.target.value)}
+        onChange={(event) => setSearchText(event.target.value)}
         value={searchText}
       />
     </div>

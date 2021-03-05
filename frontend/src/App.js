@@ -13,6 +13,9 @@ function App() {
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
   const [searchWords, setSearchWords] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [recipes, setRecipes] = useState([]);
+  const [searchWordSelections, setSearchWordSelections] = useState([]);
 
   useEffect(() => {
     // Get item from localStorage and set result on state
@@ -81,10 +84,6 @@ function App() {
     setToken(null);
   };
 
-  const addSearchWords = (searchWordCopy) => {
-    setSearchWords(searchWordCopy);
-  };
-
   const getRoutes = () => {
     let routes;
     if (token) {
@@ -97,7 +96,13 @@ function App() {
             <LandingPage
               userId={userId}
               searchWords={searchWords}
-              addSearchWords={addSearchWords}
+              setSearchWords={setSearchWords}
+              searchText={searchText}
+              setSearchText={setSearchText}
+              recipes={recipes}
+              setRecipes={setRecipes}
+              searchWordSelections={searchWordSelections}
+              setSearchWordSelections={setSearchWordSelections}
             />
           </Route>
         </Switch>
@@ -115,7 +120,13 @@ function App() {
             <LandingPage
               userId={userId}
               searchWords={searchWords}
-              addSearchWords={addSearchWords}
+              setSearchWords={setSearchWords}
+              searchText={searchText}
+              setSearchText={setSearchText}
+              recipes={recipes}
+              setRecipes={setRecipes}
+              searchWordSelections={searchWordSelections}
+              setSearchWordSelections={setSearchWordSelections}
             />
           </Route>
         </Switch>
@@ -123,6 +134,8 @@ function App() {
     }
     return routes;
   };
+
+  console.log("searchText:", searchText);
 
   return (
     <BrowserRouter>

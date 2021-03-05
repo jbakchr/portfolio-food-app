@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container } from "@material-ui/core";
 
 import SearchField from "../components/SearchField";
@@ -8,25 +8,28 @@ import RecipeList from "../components/RecipeList";
 
 import axiosInstance from "../utils/axios-instance";
 
-const LandingPage = ({ userId, searchWords, addSearchWords }) => {
-  const [searchText, setSearchText] = useState("");
-  const [searchWordSelections, setSearchWordSelections] = useState([]);
-  const [recipes, setRecipes] = useState([]);
-
-  const onSearchTextChange = (text) => {
-    setSearchText(text);
-  };
-
+const LandingPage = ({
+  userId,
+  searchWords,
+  setSearchWords,
+  searchText,
+  setSearchText,
+  recipes,
+  setRecipes,
+  searchWordSelections,
+  setSearchWordSelections,
+}) => {
   const searchWordClickHandler = async (index) => {
     // Extract clicked search word
     let searchWordsCopy = [...searchWords];
     const clickedSearchWord = searchWordsCopy.splice(index, 1);
+    console.log("search word copy:", searchWordsCopy);
 
     // Fetch recipes
     let recipes = await fetchRecipes(clickedSearchWord);
 
     // Set state
-    addSearchWords(searchWordsCopy);
+    setSearchWords(searchWordsCopy);
     setSearchWordSelections(searchWordSelections.concat(clickedSearchWord));
     setSearchText("");
     setRecipes(recipes);
@@ -70,7 +73,7 @@ const LandingPage = ({ userId, searchWords, addSearchWords }) => {
     }
 
     // Set state
-    addSearchWords([...searchWords].concat(deletedChip));
+    setSearchWords([...searchWords].concat(deletedChip));
     setSearchText("");
     setRecipes(recipes);
     setSearchWordSelections(chipSelections);
@@ -78,10 +81,7 @@ const LandingPage = ({ userId, searchWords, addSearchWords }) => {
 
   return (
     <Container maxWidth="lg">
-      <SearchField
-        searchText={searchText}
-        onSearchTextChange={onSearchTextChange}
-      />
+      <SearchField searchText={searchText} setSearchText={setSearchText} />
       <SearchWordChipList
         searchWordSelections={searchWordSelections}
         chipDeleteHandler={chipDeleteHandler}
