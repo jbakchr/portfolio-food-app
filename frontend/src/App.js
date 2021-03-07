@@ -71,6 +71,19 @@ function App() {
           token: data.token,
         })
       );
+
+      // Fetch recipes if 'searchWordSelections is bigger than 0
+      let recipes = [];
+      if (searchWordSelections.length > 0) {
+        const response = await axiosInstance.get(`/recipes/${data.userId}`, {
+          params: {
+            q: JSON.stringify(searchWordSelections),
+          },
+        });
+        recipes = response.data;
+      }
+
+      setRecipes(recipes);
       setUserId(data.userId);
       setToken(data.token);
     } catch (error) {
@@ -82,6 +95,66 @@ function App() {
     localStorage.removeItem("userData");
     setUserId(null);
     setToken(null);
+  };
+
+  const searchWordClickHandler = async (index) => {
+    // Extract clicked search word
+    let searchWordsCopy = [...searchWords];
+    const clickedSearchWord = searchWordsCopy.splice(index, 1);
+    console.log("search word copy:", searchWordsCopy);
+
+    // Fetch recipes
+    let recipes = await fetchRecipes(clickedSearchWord);
+
+    // Set state
+    setSearchWords(searchWordsCopy);
+    setSearchWordSelections(searchWordSelections.concat(clickedSearchWord));
+    setSearchText("");
+    setRecipes(recipes);
+  };
+
+  const fetchRecipes = async (clickedSearchWord) => {
+    let presentSearchWordSelections = [...searchWordSelections].concat(
+      clickedSearchWord
+    );
+
+    try {
+      const { data } = await axiosInstance.get(`recipes/${userId}`, {
+        params: {
+          q: JSON.stringify(presentSearchWordSelections),
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const chipDeleteHandler = async (index) => {
+    // Extract chip selection and deleted chip
+    const chipSelections = [...searchWordSelections];
+    const deletedChip = chipSelections.splice(index, 1);
+
+    // Fetch recipes
+    let recipes = [];
+    if (chipSelections.length > 0) {
+      try {
+        const { data } = await axiosInstance.get(`recipes/${userId}`, {
+          params: {
+            q: JSON.stringify(chipSelections),
+          },
+        });
+        recipes = data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // Set state
+    setSearchWords([...searchWords].concat(deletedChip));
+    setSearchText("");
+    setRecipes(recipes);
+    setSearchWordSelections(chipSelections);
   };
 
   const getRoutes = () => {
@@ -103,6 +176,8 @@ function App() {
               setRecipes={setRecipes}
               searchWordSelections={searchWordSelections}
               setSearchWordSelections={setSearchWordSelections}
+              chipDeleteHandler={chipDeleteHandler}
+              searchWordClickHandler={searchWordClickHandler}
             />
           </Route>
         </Switch>
@@ -127,6 +202,8 @@ function App() {
               setRecipes={setRecipes}
               searchWordSelections={searchWordSelections}
               setSearchWordSelections={setSearchWordSelections}
+              chipDeleteHandler={chipDeleteHandler}
+              searchWordClickHandler={searchWordClickHandler}
             />
           </Route>
         </Switch>
@@ -134,8 +211,6 @@ function App() {
     }
     return routes;
   };
-
-  console.log("searchText:", searchText);
 
   return (
     <BrowserRouter>
