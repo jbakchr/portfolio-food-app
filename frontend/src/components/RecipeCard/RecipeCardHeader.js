@@ -52,7 +52,11 @@ const RecipeCardHeader = ({ userId, recipeId, title, liked_by_user }) => {
             }
           }}
         >
-          {favorite === "1" ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          {favorite === "1" && userId ? (
+            <FavoriteIcon />
+          ) : (
+            <FavoriteBorderIcon />
+          )}
         </IconButton>
       </CardActions>
     </div>
