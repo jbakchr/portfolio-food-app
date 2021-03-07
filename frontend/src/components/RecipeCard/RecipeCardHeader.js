@@ -8,7 +8,6 @@ const RecipeCardHeader = ({ userId, recipeId, title, liked_by_user }) => {
   const [favorite, setFavorite] = useState(liked_by_user);
 
   const favoriteRecipe = async () => {
-    // Send request to the back end
     try {
       const response = await axiosInstance.post(
         `/users/${userId}/recipes/${recipeId}/favorite`
@@ -21,7 +20,18 @@ const RecipeCardHeader = ({ userId, recipeId, title, liked_by_user }) => {
     }
   };
 
-  console.log("Favorite it is:", favorite);
+  const unfavoriteRecipe = async () => {
+    try {
+      const response = await axiosInstance.delete(
+        `/users/${userId}/recipes/${recipeId}/unfavorite`
+      );
+      if (response.status === 200) {
+        setFavorite("0");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div
@@ -36,7 +46,7 @@ const RecipeCardHeader = ({ userId, recipeId, title, liked_by_user }) => {
         <IconButton
           onClick={() => {
             if (favorite === "1") {
-              console.log("Unfavorite recipe");
+              unfavoriteRecipe();
             } else {
               favoriteRecipe();
             }
